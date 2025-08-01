@@ -108,3 +108,10 @@ FIFO Waveform
 
    <img width="1280" height="800" alt="image" src="https://github.com/user-attachments/assets/b8f1f34e-c522-4605-8ba5-23a421e319b8" />
 
+CURRENT FOLDER
+uart_axi_fifo_proj/
+├── rtl/
+│   ├── fifo.v
+│   ├── uart_tx.v     
+├── tb/
+│   ├── tb_uart_tx.v  
