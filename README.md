@@ -67,3 +67,12 @@ We'll design a parameterized synchronous FIFO with the following features:
         full, empty, data_out
 
   <img width="602" height="402" alt="image" src="https://github.com/user-attachments/assets/3b0d5807-fbd0-44a8-903f-c230e331fcc3" />
+
+  DIRECTORY STRUCTURE 
+  
+  uart_axi_fifo_proj/
+├── rtl/
+│   └── fifo.v
+├── tb/
+│   └── tb_fifo.v  ← (you just created this)
+
