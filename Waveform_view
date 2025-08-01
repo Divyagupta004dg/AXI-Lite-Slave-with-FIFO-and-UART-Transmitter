@@ -1,0 +1,5 @@
+Waveform_view
+
+iverilog -o tb_fifo.out tb/tb_fifo.v rtl/fifo.v
+vvp tb_fifo.out
+gtkwave tb_fifo.vcd
