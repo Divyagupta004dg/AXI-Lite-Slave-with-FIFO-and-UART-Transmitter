@@ -76,3 +76,6 @@ We'll design a parameterized synchronous FIFO with the following features:
 ├── tb/
 │   └── tb_fifo.v  ← (you just created this)
 
+<img width="1280" height="800" alt="image" src="https://github.com/user-attachments/assets/2b5ce7e3-20b8-4e14-bcf6-74beb11f9bbc" />
+
+
