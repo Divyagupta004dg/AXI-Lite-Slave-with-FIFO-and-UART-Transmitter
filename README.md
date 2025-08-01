@@ -78,4 +78,33 @@ We'll design a parameterized synchronous FIFO with the following features:
 
 <img width="1280" height="800" alt="image" src="https://github.com/user-attachments/assets/2b5ce7e3-20b8-4e14-bcf6-74beb11f9bbc" />
 
+FIFO Waveform
+
+    1 Clock (clk)
+
+        Make sure it's toggling consistently (square wave).
+
+    2 Reset (reset)
+
+        Initially high, then goes low → ensures FIFO starts empty.
+
+   3  Write Enable (wr_en) & Write Data (data_in)
+
+        When wr_en is high, check if data_in is stored in FIFO.
+
+   4  Read Enable (rd_en) & Output (data_out)
+
+        When rd_en is high, check if FIFO gives correct data_out (FIFO behavior).
+
+    5 ointers (wr_ptr, rd_ptr)
+
+        Observe how these increment and wrap around.
+
+    6 Flags (full, empty)
+
+        Ensure full goes high when FIFO is full.
+
+        Ensure empty is high initially and clears when data is written.
+
+   <img width="1280" height="800" alt="image" src="https://github.com/user-attachments/assets/b8f1f34e-c522-4605-8ba5-23a421e319b8" />
 
