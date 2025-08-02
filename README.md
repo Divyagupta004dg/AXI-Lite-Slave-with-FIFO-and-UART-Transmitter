@@ -162,3 +162,39 @@ WE WILL SEE:
   3  tx_done flag triggering FIFO read
 
   4  Serial waveform on tx line
+
+  Expected Behavior:
+
+    Data written into FIFO (write_en goes high)
+
+    UART transmits bytes one by one (tx waveform toggles serially)
+
+    tx_done goes high at the end of each 10-bit sequence
+
+    FIFO read enabled only when tx_done is high
+
+We just Now Just Built:
+
+A Mini Data Pipeline used in:
+
+    Serial I/O controllers
+
+    Sensor-to-UART bridges
+
+    Embedded SoCs for telemetry/logging
+
+    Low-power UART-based communication
+
+FIFO buffers incoming data
+
+UART sends them serially
+
+Works without parallel bus timing issues
+
+**STEP 4: AXI-Lite Slave block**
+
+It’ll allow:
+
+    Writing to FIFO from a CPU via AXI-Lite interface
+
+    Real-world usage in ARM Cortex SoC + UART combo
