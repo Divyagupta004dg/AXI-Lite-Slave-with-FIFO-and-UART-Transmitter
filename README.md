@@ -39,6 +39,7 @@ Folders:
     
     PROJECT DIRECTORY
     mkdir -p ~/uart_axi_fifo_proj/{rtl,tb,doc,img,scripts} 
+    
 cd ~/uart_axi_fifo_proj
 
 
