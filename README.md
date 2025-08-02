@@ -202,6 +202,9 @@ It’ll allow:
  <img width="709" height="408" alt="image" src="https://github.com/user-attachments/assets/5b884355-7337-4cd0-9d78-6e9cd9e8f3d9" />
 
 **We’ll implement write-only AXI-Lite, where a CPU or master can write bytes that get stored in a FIFO.**
+ALSO 
+
+making ~ axi_lite_slave.v  module — this is the key to interface with a processor or bus system (like an ARM CPU in SoCs)
 
 AXI Signal	Role
 
@@ -218,6 +221,7 @@ fifo_wr_data	----Sends byte to FIFO
 **Project Structure Update**
 
 uart_axi_fifo_proj/
+
 ├── rtl/
 
 │   ├── axi_lite_slave.v  
@@ -235,3 +239,7 @@ uart_axi_fifo_proj/
 │   ├── tb_uart_tx.v
 
 │   └── tb_uart_fifo_top.v
+
+**STEP 5 Now Creating top module connecting axi_lite_slave → FIFO → UART**
+
+making ~ axi_fifo_uart_top.v 
