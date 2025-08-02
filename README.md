@@ -126,4 +126,12 @@ uart_axi_fifo_proj/
 ├── tb/
 │   ├── tb_uart_tx.v  
 
+STEP 3: Now that UART TX and FIFO are individually working, you can connect them together so data written into FIFO is transmitted out serially.
+
+Integrate FIFO → UART
+New Module: uart_fifo_top.v
+
+This module connects FIFO output to UART input.
+
+<img width="1280" height="800" alt="image" src="https://github.com/user-attachments/assets/042b7d06-6b6b-4253-b73b-2908c6fa99fa" />
 
