@@ -14,19 +14,33 @@ Skills Proven:
     Debugging with GTKWave
     
 AXI_FIFO_UART_Project/
+
 ├── rtl/
+
 │   ├── axi_lite_slave.v
+
 │   ├── fifo.v
+
 │   └── uart_tx.v
+
 ├── tb/
+
 │   ├── axi_lite_slave_tb.v
+
 │   ├── fifo_tb.v
+
 │   └── uart_tx_tb.v
+
 ├── scripts/
-│   ├── Makefile (optional)
+
+│   ├── Makefile (optional
+
 ├── waveforms/
-│   └── *.vcd (from GTKWave)
+
+│   └── *.vcd (from GTKWave
+
 ├── doc/
+
 │   └── README.md, block_diagram.png
 
 <img width="1024" height="1024" alt="image" src="https://github.com/user-attachments/assets/768e4582-858f-47ca-b521-d1081d90e9c1" />
@@ -51,6 +65,7 @@ Folders:
     scripts/ → Simulation/Synthesis scripts (Makefile or Bash)
     
     PROJECT DIRECTORY
+    
     mkdir -p ~/uart_axi_fifo_proj/{rtl,tb,doc,img,scripts} 
     
 cd ~/uart_axi_fifo_proj
@@ -85,9 +100,13 @@ We'll design a parameterized synchronous FIFO with the following features:
   DIRECTORY STRUCTURE 
   
   uart_axi_fifo_proj/
+  
 ├── rtl/
+
 │   └── fifo.v
+
 ├── tb/
+
 │   └── tb_fifo.v  ← (you just created this)
 
 <img width="1280" height="800" alt="image" src="https://github.com/user-attachments/assets/2b5ce7e3-20b8-4e14-bcf6-74beb11f9bbc" />
@@ -133,11 +152,17 @@ FIFO Waveform
     Raises tx_done when transmission completes
 
 CURRENT FOLDER
+
 uart_axi_fifo_proj/
+
 ├── rtl/
+
 │   ├── fifo.v
-│   ├── uart_tx.v     
+
+│   ├── uart_tx.v  
+
 ├── tb/
+
 │   ├── tb_uart_tx.v  
 
 STEP 3: Now that UART TX and FIFO are individually working, you can connect them together so data written into FIFO is transmitted out serially.
@@ -215,6 +240,7 @@ It’ll allow:
  <img width="709" height="408" alt="image" src="https://github.com/user-attachments/assets/5b884355-7337-4cd0-9d78-6e9cd9e8f3d9" />
 
 **We’ll implement write-only AXI-Lite, where a CPU or master can write bytes that get stored in a FIFO.**
+
 ALSO 
 
 making ~ axi_lite_slave.v  module — this is the key to interface with a processor or bus system (like an ARM CPU in SoCs)
@@ -256,4 +282,57 @@ uart_axi_fifo_proj/
 **STEP 5 Now Creating top module connecting axi_lite_slave → FIFO → UART**
 
 making ~ axi_fifo_uart_top.v 
+
 <img width="1280" height="800" alt="image" src="https://github.com/user-attachments/assets/7910075a-8d68-4d7f-b0ee-0318b3dea461" />
+
+**axi_fifo_uart_top.v**	----RTL Design	Connects AXI interface, FIFO, and UART TX
+
+Why do we need it?
+
+This file connects all the major components together:
+
+    AXI-Lite Slave (control interface)
+
+    FIFO buffer (temporary storage)
+
+    UART transmitter (serial output)
+
+It is the heart of your system — the full datapath.
+
+What does it do?
+
+    Accepts data via AXI-Lite write transactions
+
+    Stores the data in a FIFO buffer
+
+    Then, automatically sends the data serially through the UART TX line
+
+Internal modules used:
+
+    axi_lite_slave.v → receives 32-bit data via AXI
+
+    fifo.v → stores 8-bit chunks
+
+    uart_tx.v → transmits data over TX serially
+
+We can’t verify RTL code without a testbench.
+
+**tb_axi_fifo_uart_top.v** ---- 	Simulates CPU-like AXI writes + dumps waveform
+
+This testbench simulates the AXI writes and allows us to:
+
+    Observe the FIFO being written
+
+    Observe UART transmission starting automatically
+
+    Validate correct data flow from AXI → FIFO → UART
+
+⚙️ What does it do?
+
+    Creates clock & reset
+
+    Sends 3 AXI-style writes (s_axi_awvalid, s_axi_wdata)
+
+    Waits for UART to transmit the data
+
+    Dumps all signals into tb_axi_fifo_uart_top.vcd for GTKWave
