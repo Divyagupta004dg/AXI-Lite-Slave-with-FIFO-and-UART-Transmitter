@@ -1,5 +1,18 @@
 # AXI-Lite-Slave-with-FIFO-and-UART-Transmitter
+    “Implemented a fully synthesizable AXI-write-to-UART FIFO bridge in Verilog with UVM-based functional verification on Ubuntu. Simulated using open-source tools and validated data integrity across protocol boundaries.”
 
+Skills Proven:
+
+    RTL Design (AXI, UART, FIFO)
+
+    Clock Domain Handling
+
+    UVM Verification
+
+    Open-source toolchain
+
+    Debugging with GTKWave
+    
 AXI_FIFO_UART_Project/
 ├── rtl/
 │   ├── axi_lite_slave.v
@@ -243,3 +256,4 @@ uart_axi_fifo_proj/
 **STEP 5 Now Creating top module connecting axi_lite_slave → FIFO → UART**
 
 making ~ axi_fifo_uart_top.v 
+<img width="1280" height="800" alt="image" src="https://github.com/user-attachments/assets/7910075a-8d68-4d7f-b0ee-0318b3dea461" />
