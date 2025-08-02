@@ -336,3 +336,28 @@ This testbench simulates the AXI writes and allows us to:
     Waits for UART to transmit the data
 
     Dumps all signals into tb_axi_fifo_uart_top.vcd for GTKWave
+
+
+
+Python GUI simulation that visually shows:
+
+    ✅ AXI-style data writes
+
+    ✅ FIFO buffer (filling & emptying)
+
+    ✅ UART TX signal (bit stream visualizer)
+
+    ✅ Optional: ASCII output of TX line
+
+   1 mkdir -p ~/uart_axi_fifo_proj/{rtl,tb,doc,img,scripts} 
+    
+cd ~/uart_axi_fifo_proj
+
+2. code gui_sim.py
+
+3. python3 gui_sim.py
+ 
+<img width="822" height="734" alt="image" src="https://github.com/user-attachments/assets/d8c4af2f-9f0c-4a53-aa07-a07bb537fc62" />
+
+<img width="1280" height="800" alt="image" src="https://github.com/user-attachments/assets/e5b2a910-28c2-450f-bf26-13cfa3ba6a49" />
+<img width="1280" height="800" alt="image" src="https://github.com/user-attachments/assets/1ae5f47c-ef2e-4e8a-8e3a-de2dde32d53f" />
