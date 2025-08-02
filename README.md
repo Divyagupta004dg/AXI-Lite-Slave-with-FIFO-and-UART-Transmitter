@@ -201,5 +201,5 @@ It’ll allow:
 
  <img width="709" height="408" alt="image" src="https://github.com/user-attachments/assets/5b884355-7337-4cd0-9d78-6e9cd9e8f3d9" />
 
- 
+**We’ll implement write-only AXI-Lite, where a CPU or master can write bytes that get stored in a FIFO.**
 
