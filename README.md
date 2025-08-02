@@ -135,3 +135,14 @@ This module connects FIFO output to UART input.
 
 <img width="1280" height="800" alt="image" src="https://github.com/user-attachments/assets/042b7d06-6b6b-4253-b73b-2908c6fa99fa" />
 
+AFTER Now Doing Full Integration!
+
+WE WILL SEE:
+
+  1  FIFO accepting values
+
+  2  UART sending them one by one
+
+  3  tx_done flag triggering FIFO read
+
+  4  Serial waveform on tx line
