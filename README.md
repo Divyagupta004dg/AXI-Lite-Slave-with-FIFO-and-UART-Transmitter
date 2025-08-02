@@ -361,3 +361,4 @@ cd ~/uart_axi_fifo_proj
 
 <img width="1280" height="800" alt="image" src="https://github.com/user-attachments/assets/e5b2a910-28c2-450f-bf26-13cfa3ba6a49" />
 <img width="1280" height="800" alt="image" src="https://github.com/user-attachments/assets/1ae5f47c-ef2e-4e8a-8e3a-de2dde32d53f" />
+<img width="750" height="535" alt="image" src="https://github.com/user-attachments/assets/d7a93d13-a02b-4e86-aa69-5e6943161d74" />
