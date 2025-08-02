@@ -139,17 +139,17 @@ This module connects FIFO output to UART input.
 
 Signal	             Meaning
 
-clk	            Main system clock
+clk	 --------           Main system clock
 
-reset	          Reset pulse at the beginning
+reset	--------          Reset pulse at the beginning
 
-write_en	       When FIFO is being written
+write_en	--------      When FIFO is being written
 
-data_in	        Data going into FIFO
+data_in	---------        Data going into FIFO
 
-tx	             Serial transmission (1 bit at a time)
+tx	  --------           Serial transmission (1 bit at a time)
 
-tx_done	        UART finished sending a byte
+tx_done	--------      UART finished sending a byte
 
 AFTER Now Doing Full Integration!
 
