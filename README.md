@@ -203,3 +203,35 @@ It’ll allow:
 
 **We’ll implement write-only AXI-Lite, where a CPU or master can write bytes that get stored in a FIFO.**
 
+AXI Signal	Role
+
+s_axi_aw*	------ Write address (not used internally here)
+
+s_axi_w*	------- Data — only wdata[7:0] sent to FIFO
+
+s_axi_b*	------- Sends write response (OKAY)
+
+fifo_wr_en	------Enables FIFO write
+
+fifo_wr_data	----Sends byte to FIFO
+
+**Project Structure Update**
+
+uart_axi_fifo_proj/
+├── rtl/
+
+│   ├── axi_lite_slave.v  
+
+│   ├── uart_tx.v
+
+│   ├── fifo.v
+
+│   └── uart_fifo_top.v
+
+├── tb/
+
+│   ├── tb_fifo.v
+
+│   ├── tb_uart_tx.v
+
+│   └── tb_uart_fifo_top.v
