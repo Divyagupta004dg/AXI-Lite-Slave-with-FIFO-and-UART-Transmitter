@@ -108,6 +108,16 @@ FIFO Waveform
 
    <img width="1280" height="800" alt="image" src="https://github.com/user-attachments/assets/b8f1f34e-c522-4605-8ba5-23a421e319b8" />
 
+   shows 
+   
+    UART transmitter:
+
+    Accepts parallel input (tx_data)
+
+    Sends serial data via tx line (start + 8 bits + stop)
+
+    Raises tx_done when transmission completes
+
 CURRENT FOLDER
 uart_axi_fifo_proj/
 ├── rtl/
@@ -115,3 +125,5 @@ uart_axi_fifo_proj/
 │   ├── uart_tx.v     
 ├── tb/
 │   ├── tb_uart_tx.v  
+
+
