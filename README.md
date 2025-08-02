@@ -198,3 +198,8 @@ It’ll allow:
     Writing to FIFO from a CPU via AXI-Lite interface
 
     Real-world usage in ARM Cortex SoC + UART combo
+
+ <img width="709" height="408" alt="image" src="https://github.com/user-attachments/assets/5b884355-7337-4cd0-9d78-6e9cd9e8f3d9" />
+
+ 
+
