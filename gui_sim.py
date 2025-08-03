@@ -3,6 +3,11 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
 from datetime import datetime
+import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation
+import os
+
+fifo_usage_over_time = []
 
 class UART_FIFO_GUI:
     def __init__(self, root):
@@ -11,19 +16,21 @@ class UART_FIFO_GUI:
         self.fifo = []
         self.max_fifo = 32
         self.log_lines = []
-        self.dark_mode = True
+        self.uart_log = []
+        self.tx_count = 0
         self.last_uart_frame = ""
+        self.dark_mode = True
 
         self.setup_styles()
         self.build_gui()
 
     def setup_styles(self):
         self.set_theme_colors()
+
         self.root.configure(bg=self.bg_color)
         style = ttk.Style()
         style.theme_use("clam")
-        style.configure("TButton", background=self.accent, foreground=self.bg_color,
-                        font=('Courier', 10, 'bold'))
+        style.configure("TButton", background=self.accent, foreground=self.bg_color, font=('Courier', 10, 'bold'))
         style.configure("TLabel", background=self.bg_color, foreground=self.fg_color)
         style.configure("TEntry", fieldbackground="#2e2e3e", foreground=self.fg_color)
         style.configure("TFrame", background=self.bg_color)
@@ -71,15 +78,18 @@ class UART_FIFO_GUI:
         self.canvas = tk.Canvas(frame, width=700, height=100, bg='white')
         self.canvas.grid(row=5, column=0, columnspan=3, pady=10)
 
+        # Buttons
         ttk.Button(frame, text="Send 1 Byte", command=self.send_uart).grid(row=6, column=0)
         ttk.Button(frame, text="Send All FIFO", command=self.send_all_uart).grid(row=6, column=1)
         ttk.Button(frame, text="Show Waveform", command=self.show_waveform_window).grid(row=6, column=2)
 
-        ttk.Label(frame, text="AXI Write Log:").grid(row=7, column=0, sticky="w")
-        self.axi_log = tk.Text(frame, height=5, width=70, bg="#2e2e3e", fg="white", font=('Courier', 9))
-        self.axi_log.grid(row=8, column=0, columnspan=3)
+        ttk.Button(frame, text="Export UART Log", command=self.export_uart_log).grid(row=7, column=0)
+        ttk.Button(frame, text="Chart FIFO Usage", command=self.plot_fifo_usage).grid(row=7, column=1)
+        ttk.Button(frame, text="Toggle Light/Dark Mode", command=self.toggle_theme).grid(row=7, column=2)
 
-        ttk.Button(frame, text="Toggle Light/Dark Mode", command=self.toggle_theme).grid(row=9, column=2, sticky="e")
+        ttk.Label(frame, text="AXI Write Log:").grid(row=8, column=0, sticky="w")
+        self.axi_log = tk.Text(frame, height=5, width=70, bg="#2e2e3e", fg="white", font=('Courier', 9))
+        self.axi_log.grid(row=9, column=0, columnspan=3)
 
         self.update_fifo_display()
 
@@ -105,6 +115,7 @@ class UART_FIFO_GUI:
                 log = f"[{datetime.now().strftime('%H:%M:%S')}] AXI WRITE -> FIFO <= 0x{hexval}"
                 self.axi_log.insert(tk.END, log + "\n")
                 self.axi_log.see(tk.END)
+                fifo_usage_over_time.append(len(self.fifo))
             else:
                 messagebox.showwarning("FIFO Full", "FIFO is full! Cannot write more data.")
         except:
@@ -119,9 +130,11 @@ class UART_FIFO_GUI:
         uart_frame = '0' + data_bin[::-1] + '1'
         self.uart_output.insert(tk.END, f"{uart_frame}  (0x{data_hex})\n")
         self.ascii_output.config(text=f"ASCII: '{chr(value)}'")
-        self.draw_waveform_blocks(uart_frame)
         self.last_uart_frame = uart_frame
+        self.uart_log.append(f"{datetime.now().strftime('%H:%M:%S')} → {uart_frame} (0x{data_hex})")
+        fifo_usage_over_time.append(len(self.fifo))
         self.update_fifo_display()
+        self.draw_waveform_blocks(uart_frame)  # Keep block waveform here!
 
     def send_all_uart(self):
         if not self.fifo:
@@ -149,28 +162,34 @@ class UART_FIFO_GUI:
     def show_waveform_window(self):
         if not self.last_uart_frame:
             return
+        fig, ax = plt.subplots()
+        ax.set_title("UART TX Waveform")
+        ax.set_ylim(-0.5, 1.5)
+        ax.set_xlim(0, len(self.last_uart_frame))
+        ax.set_xlabel("Bit index")
+        ax.set_ylabel("Logic level")
+        ax.step(range(len(self.last_uart_frame)), [int(b) for b in self.last_uart_frame], where="post", color="blue")
+        plt.grid(True)
+        plt.show()
 
-        popup = tk.Toplevel(self.root)
-        popup.title("UART Waveform Viewer")
-        popup.geometry("800x200")
-        popup.configure(bg="white")
+    def export_uart_log(self):
+        with open("uart_log.txt", "w") as f:
+            f.write("\n".join(self.uart_log))
+        messagebox.showinfo("Exported", "UART log saved to uart_log.txt")
 
-        waveform_canvas = tk.Canvas(popup, width=750, height=150, bg='white')
-        waveform_canvas.pack(padx=10, pady=10)
+    def plot_fifo_usage(self):
+        if not fifo_usage_over_time:
+            messagebox.showinfo("No Data", "No FIFO usage data to plot.")
+            return
+        plt.figure()
+        plt.plot(fifo_usage_over_time, marker="o", color="purple")
+        plt.title("FIFO Usage Over Time")
+        plt.xlabel("Operation #")
+        plt.ylabel("FIFO Size")
+        plt.grid(True)
+        plt.tight_layout()
+        plt.show()
 
-        x = 10
-        bit_width = 40
-        level_y_high = 40
-        level_y_low = 100
-        prev_y = level_y_low
-
-        for bit in self.last_uart_frame:
-            bit_val = int(bit)
-            y = level_y_high if bit_val == 1 else level_y_low
-            waveform_canvas.create_line(x, prev_y, x, y, fill='blue', width=2)
-            waveform_canvas.create_line(x, y, x + bit_width, y, fill='blue', width=2)
-            prev_y = y
-            x += bit_width
 
 def show_welcome():
     splash = tk.Tk()
@@ -181,8 +200,9 @@ def show_welcome():
     tk.Label(splash, text="AXI → FIFO → UART Simulation GUI", fg="lime", bg="black",
              font=("Consolas", 16, "bold")).pack(pady=30)
 
-    tk.Label(splash, text="Simulate FIFO writes, visualize UART transmission,\n"
-                          "switch themes, and show waveform in popup window.",
+    tk.Label(splash, text="This GUI-based simulator models the data flow commonly seen in embedded and SoC designs \n "
+    "specifically how data written over an AXI interface gets buffered into a FIFO,\n" 
+    "and then serialized and transmitted via UART",
              fg="white", bg="black", font=("Arial", 11)).pack(pady=10)
 
     tk.Button(splash, text="Launch Simulation", font=("Arial", 12, "bold"),
@@ -197,3 +217,4 @@ def start_main_gui():
 
 if __name__ == "__main__":
     show_welcome()
+
