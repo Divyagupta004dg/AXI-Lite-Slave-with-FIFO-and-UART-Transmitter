@@ -373,3 +373,11 @@ python3 -m venv venv
 
 3 python gui_sim.py
 
+
+**Why You See 10 Blocks for One Byte?**
+
+Each UART transmission frame consists of the following 10 bits:
+Bit Position	Bit Type	Description
+0	Start Bit	Always 0, signals start of transmission
+1–8	Data Bits	8 bits of data, sent LSB first
+9	Stop Bit	Always 1, signals end of transmission
