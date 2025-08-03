@@ -386,3 +386,26 @@ ALL FILES
 
 <img width="1280" height="800" alt="image" src="https://github.com/user-attachments/assets/ad215889-3a0c-434b-b326-58a6cec109b3" />
 
+## RTL to GDSII 
+
+STEP 1: Design Entry (RTL)
+
+ Files: uart.v, fifo.v, top.v
+
+Tools: Any code editor
+
+This is behavioral/synthesizable logic – the starting point of the design.
+
+STEP 2: RTL Simulation (Functional Verification)
+
+   Tool: Icarus Verilog + GTKWave
+
+    Goal: Check functionality using testbench
+
+iverilog -o uart_tb.vvp uart.v uart_tb.v
+vvp uart_tb.vvp
+gtkwave dump.vcd
+
+Ensure your design behaves correctly before synthesis.
+
+Screenshot: GTKWave waveform showing TX bits going out, FIFO writes etc. already pasted above .
