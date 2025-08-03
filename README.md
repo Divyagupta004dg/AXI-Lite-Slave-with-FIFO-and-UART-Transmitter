@@ -381,3 +381,8 @@ Bit Position	Bit Type	Description
 0	Start Bit	Always 0, signals start of transmission
 1–8	Data Bits	8 bits of data, sent LSB first
 9	Stop Bit	Always 1, signals end of transmission
+
+ALL FILES 
+
+<img width="1280" height="800" alt="image" src="https://github.com/user-attachments/assets/ad215889-3a0c-434b-b326-58a6cec109b3" />
+
