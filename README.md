@@ -409,3 +409,27 @@ gtkwave dump.vcd
 Ensure your design behaves correctly before synthesis.
 
 Screenshot: GTKWave waveform showing TX bits going out, FIFO writes etc. already pasted above .
+
+3 open lane synthesis occured 
+
+<img width="1280" height="800" alt="image" src="https://github.com/user-attachments/assets/019b9296-c71f-4b5b-bd21-cfe76a16d22d" />
+
+<img width="1280" height="800" alt="image" src="https://github.com/user-attachments/assets/2fd05690-fe10-49f3-9b00-eb5c0b46db4d" />
+
+ full flow in OpenLane is completed 
+ 
+File	Purpose
+
+gds/fifo.gds-----	Full layout
+
+lef/fifo.lef-----	Abstract layout
+
+def/fifo.def-----	Placement + routing
+
+verilog/fifo.v-----	Final netlist
+
+sdc/fifo.sdc----	Clock constraints
+
+spef/fifo.spef----Parasitic extraction
+
+sta/----Timing reports
