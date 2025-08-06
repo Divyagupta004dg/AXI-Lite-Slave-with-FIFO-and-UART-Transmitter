@@ -438,4 +438,17 @@ STEP 4: LOGIC SYNTHESIS
 
 Logic synthesis is the process of converting your RTL (Verilog code) into a gate-level netlist using standard cells from the PDK (e.g., NANDs, NORs, flip-flops, etc.).
 
+STEP 5 FLOORPLANNING/ PLACEMENT
+
+The GDS layout shows the placed standard cells within the floorplanned core area. The placement follows the defined rows and is aligned to the floorplan structure (die area, IOs, power straps). The view reflects the post-placement and pre-routing state of the physical design.
+
+<img width="669" height="217" alt="image" src="https://github.com/user-attachments/assets/811add8c-0f07-4411-b842-1c0ba078cb08" />
+
 <img width="1280" height="800" alt="image" src="https://github.com/user-attachments/assets/befb3113-5693-4bc8-a69b-c5c8060f354b" />
+<img width="1222" height="768" alt="image" src="https://github.com/user-attachments/assets/6be27b0c-21c6-4c71-a299-dfe399effb8b" />
+
+screenshot is not just floorplan, it is a post-placement view, meaning:
+
+  1  The floorplan has already been done: chip dimensions, power straps, IOs, rows, etc.
+
+  2  AND cells have been placed: those blocks of green/yellow/blue are standard cells.
