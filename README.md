@@ -433,3 +433,9 @@ sdc/fifo.sdc----	Clock constraints
 spef/fifo.spef----Parasitic extraction
 
 sta/----Timing reports
+
+STEP 4: LOGIC SYNTHESIS 
+
+Logic synthesis is the process of converting your RTL (Verilog code) into a gate-level netlist using standard cells from the PDK (e.g., NANDs, NORs, flip-flops, etc.).
+
+<img width="1280" height="800" alt="image" src="https://github.com/user-attachments/assets/befb3113-5693-4bc8-a69b-c5c8060f354b" />
