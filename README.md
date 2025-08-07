@@ -452,3 +452,100 @@ screenshot is not just floorplan, it is a post-placement view, meaning:
   1  The floorplan has already been done: chip dimensions, power straps, IOs, rows, etc.
 
   2  AND cells have been placed: those blocks of green/yellow/blue are standard cells.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  ✅ 1. Use OpenLane’s Built-in Summary Command
+
+After the flow is completed successfully (like you did earlier):
+
+cd /openlane
+flow.tcl -design fifo_design -report_summary
+
+This will print a clean summary in the terminal with:
+
+    Area
+
+    Cell count
+
+    Worst Slack
+
+    Leakage & Dynamic power
+
+    Timing violations
+
+    DRC/LVS results
+
+    Final GDS and netlists
+
+<img width="574" height="300" alt="image" src="https://github.com/user-attachments/assets/4914c557-2ac4-4d6b-a078-7e316b3c0c49" />
+
